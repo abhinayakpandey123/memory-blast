@@ -1,16 +1,39 @@
-# React + Vite
+# Memory Blast
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Memory Blast is a simple memory card game made using React.
 
-Currently, two official plugins are available:
+## About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The game has 12 cards:
+- 5 matching pairs
+- 1 Bomb card
+- 1 Time card
 
-## React Compiler
+The player has 50 seconds to find all 5 matching pairs.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Cards are shuffled randomly
+- Matching cards stay open
+- Wrong cards close after a short time
+- Bomb card reduces 10 seconds
+- Time card adds 10 seconds
+- Move count is displayed
+- Timer is displayed
+- Restart button is available
+- Responsive design for mobile and desktop
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+
+- React
+- JavaScript
+- CSS
+- Vite
+
+## React Concepts Used
+
+- `useState` – to manage game data
+- `useEffect` – to handle timer and card matching
+- Event handling – for card clicks
+- Array methods – for finding and displaying cards
+- Conditional rendering – to show selected and matched cards
