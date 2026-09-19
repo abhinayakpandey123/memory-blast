@@ -40,6 +40,8 @@ const [cards, setCards] = useState(() => shuffleCards(basecards));
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
 
+  const [time, setTime] = useState(50);
+
   function handleCardClick(card) {
 
     if (selectedCards.length === 2) {
@@ -52,6 +54,26 @@ const [cards, setCards] = useState(() => shuffleCards(basecards));
 
     setSelectedCards([...selectedCards, card.id]);
   }
+
+  useEffect(() => {
+
+  const timer = setInterval(() => {
+    setTime((prevTime) => {
+      if (prevTime <= 1){
+        clearInterval(timer);
+        return 0;
+      }
+         return prevTime - 1;
+  });
+}, 1000);
+
+  return () => {
+    clearInterval(timer);
+  };
+
+}, []);
+
+  
 
   useEffect(() => {
 
@@ -89,6 +111,9 @@ const [cards, setCards] = useState(() => shuffleCards(basecards));
   return (
    <div className="game">
   <h1>Memory Blast</h1>
+  <div className="timer">
+  ⏱️ {time}s
+</div>
 
   <div className="card-grid">
     {cards.map((card) => {
