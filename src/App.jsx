@@ -44,14 +44,14 @@ const [cards, setCards] = useState(() => shuffleCards(basecards));
 
   const [time, setTime] = useState(50);
   const [moves, setMoves] = useState(0);
+  const isGameWon = matchedCards.length === 10;
 
   function handleCardClick(card) {
  
 
-  if (time === 0) {
-    return;
-  }
-
+  if (time === 0 || isGameWon) {
+  return;
+}
 
     if (selectedCards.length === 2) {
       return;
@@ -163,6 +163,12 @@ if (card.special === "time") {
 {time === 0 && (
   <h2 className="game-over">
      ❌Game Over!
+  </h2>
+)}
+
+{isGameWon && (
+  <h2 className="game-over">
+    🥳🎆 You Win!
   </h2>
 )}
 
