@@ -32,17 +32,26 @@ const basecards = [
   { id: 9, value: headphone },
   { id: 10, value: headphone },
 
-  { id: 11, value: bomb },
-  { id: 12, value: timer }
+  { id: 11, value: bomb, special: "bomb" },
+  { id: 12, value: timer, special: "time" }
+ 
 ];
 
 const [cards, setCards] = useState(() => shuffleCards(basecards));
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
+  const [usedCards, setUsedCards] = useState([]);
 
   const [time, setTime] = useState(50);
+  const [moves, setMoves] = useState(0);
 
   function handleCardClick(card) {
+ 
+
+  if (time === 0) {
+    return;
+  }
+
 
     if (selectedCards.length === 2) {
       return;
@@ -51,8 +60,40 @@ const [cards, setCards] = useState(() => shuffleCards(basecards));
     if (selectedCards.includes(card.id)) {
       return;
     }
+ 
+   if (usedCards.includes(card.id)) {
+  return;
+}
 
-    setSelectedCards([...selectedCards, card.id]);
+ if (card.special === "bomb") {
+  setTime((prevTime) => Math.max(0, prevTime - 10));
+  setMoves(moves + 1);
+  setSelectedCards([...selectedCards, card.id]);
+  setUsedCards([...usedCards, card.id]);
+
+  setTimeout(() => {
+    setSelectedCards([]);
+  }, 800);
+
+  return;
+}
+
+if (card.special === "time") {
+  setTime((prevTime) => prevTime + 10);
+  setMoves(moves + 1);
+  setSelectedCards([...selectedCards, card.id]);
+  setUsedCards([...usedCards, card.id]);
+
+  setTimeout(() => {
+    setSelectedCards([]);
+  }, 800);
+
+  return;
+}
+
+  setMoves(moves + 1);
+
+  setSelectedCards([...selectedCards, card.id]);
   }
 
   useEffect(() => {
@@ -114,6 +155,16 @@ const [cards, setCards] = useState(() => shuffleCards(basecards));
   <div className="timer">
   ⏱️ {time}s
 </div>
+
+<div className="moves">
+  Moves: {moves}
+</div>
+
+{time === 0 && (
+  <h2 className="game-over">
+     ❌Game Over!
+  </h2>
+)}
 
   <div className="card-grid">
     {cards.map((card) => {
