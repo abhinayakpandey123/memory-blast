@@ -10,9 +10,13 @@ import headphone from "./assets/headphone.jpeg";
 import bomb from "./assets/bomb.jpeg";
 import timer from "./assets/timer.jpeg";
 
+function shuffleCards(array) {
+  return [...array].sort(() => Math.random() - 0.5);
+}
+
 function App() {
 
-const cards = [
+const basecards = [
   { id: 1, value: cat },
   { id: 2, value: cat },
 
@@ -31,6 +35,8 @@ const cards = [
   { id: 11, value: bomb },
   { id: 12, value: timer }
 ];
+
+const [cards, setCards] = useState(() => shuffleCards(basecards));
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
 
