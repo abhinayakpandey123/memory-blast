@@ -45,6 +45,14 @@ const [cards, setCards] = useState(() => shuffleCards(basecards));
   const [time, setTime] = useState(50);
   const [moves, setMoves] = useState(0);
   const isGameWon = matchedCards.length === 10;
+  function restartGame() {
+  setCards(shuffleCards(basecards));
+  setSelectedCards([]);
+  setMatchedCards([]);
+  setUsedCards([]);
+  setTime(50);
+  setMoves(0);
+}
 
   function handleCardClick(card) {
  
@@ -67,7 +75,7 @@ const [cards, setCards] = useState(() => shuffleCards(basecards));
 
  if (card.special === "bomb") {
   setTime((prevTime) => Math.max(0, prevTime - 10));
-  setMoves(moves + 1);
+  setMoves((prevMoves) => prevMoves + 1);
   setSelectedCards([...selectedCards, card.id]);
   setUsedCards([...usedCards, card.id]);
 
@@ -80,7 +88,7 @@ const [cards, setCards] = useState(() => shuffleCards(basecards));
 
 if (card.special === "time") {
   setTime((prevTime) => prevTime + 10);
-  setMoves(moves + 1);
+  setMoves((prevMoves) => prevMoves + 1);
   setSelectedCards([...selectedCards, card.id]);
   setUsedCards([...usedCards, card.id]);
 
@@ -91,7 +99,7 @@ if (card.special === "time") {
   return;
 }
 
-  setMoves(moves + 1);
+setMoves((prevMoves) => prevMoves + 1);
 
   setSelectedCards([...selectedCards, card.id]);
   }
@@ -100,7 +108,7 @@ if (card.special === "time") {
 
   const timer = setInterval(() => {
     setTime((prevTime) => {
-      if (prevTime <= 1){
+   if (prevTime <= 1 || isGameWon){
         clearInterval(timer);
         return 0;
       }
@@ -112,7 +120,7 @@ if (card.special === "time") {
     clearInterval(timer);
   };
 
-}, []);
+  }, [isGameWon]);
 
   
 
@@ -132,11 +140,12 @@ if (card.special === "time") {
 
     if (firstCard.value === secondCard.value) {
 
-      setMatchedCards([
-        ...matchedCards,
-        firstCard.id,
-        secondCard.id
-      ]);
+     
+      setMatchedCards((prevMatchedCards) => [
+  ...prevMatchedCards,
+  firstCard.id,
+  secondCard.id
+]);
 
       setSelectedCards([]);
 
@@ -171,6 +180,10 @@ if (card.special === "time") {
     🥳🎆 You Win!
   </h2>
 )}
+
+<button className="restart-btn" onClick={restartGame}>
+  🔄 Restart Game
+</button>
 
   <div className="card-grid">
     {cards.map((card) => {

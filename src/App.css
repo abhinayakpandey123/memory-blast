@@ -37,6 +37,35 @@ body {
 
   text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
+.restart-btn {
+  margin: 15px 0 20px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background: white;
+  color: #4c1d95;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  transition: 0.25s ease;
+}
+
+.restart-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+.moves {
+  width: fit-content;
+  margin: 0 auto 15px;
+  padding: 8px 18px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
 .timer {
   width: fit-content;
   margin: 0 auto 20px;
