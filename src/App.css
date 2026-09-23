@@ -1,8 +1,12 @@
+
+:root {
+  --hue: 250;
+}
 * {
   box-sizing: border-box;
 }
 
-body {
+ body {
   margin: 0;
   font-family: Arial, sans-serif;
   min-height: 100vh;
@@ -11,8 +15,26 @@ body {
     135deg,
     #8d55e7,
     #ea5ec0,
-    #63d0e3
+    #63d0e3,
+    #8d55e7
   );
+
+  background-size: 300% 300%;
+  animation: backgroundMove 7s ease infinite;
+}
+
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .game {
@@ -30,12 +52,19 @@ body {
   text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.game-over {
-  color: white;
-  font-size: 30px;
-  margin: 10px 0 20px;
 
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+ .game-over {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  color: white;
+}
+
+.game-over h2 {
+  margin: 0;
+  font-size: 28px;
 }
 .restart-btn {
   margin: 15px 0 20px;
@@ -189,5 +218,302 @@ body {
   .card {
     width: 110px;
     height: 110px;
+  }
+}
+.loader {
+  --dur: 2s;
+  display: block;
+  margin: auto;
+  width: 80px;
+  height: auto;
+}
+
+.loader__glare-top,
+.loader__glare-bottom,
+.loader__model,
+.loader__motion-thick,
+.loader__motion-medium,
+.loader__motion-thin,
+.loader__sand-drop,
+.loader__sand-fill,
+.loader__sand-grain-left,
+.loader__sand-grain-right,
+.loader__sand-line-left,
+.loader__sand-line-right,
+.loader__sand-mound-top,
+.loader__sand-mound-bottom {
+  animation-duration: var(--dur);
+  animation-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+  animation-iteration-count: infinite;
+}
+
+.loader__glare-top {
+  animation-name: glare-top;
+}
+
+.loader__glare-bottom {
+  animation-name: glare-bottom;
+}
+
+.loader__model {
+  animation-name: loader-flip;
+  transform-origin: 12.25px 16.75px;
+}
+
+.loader__motion-thick,
+.loader__motion-medium,
+.loader__motion-thin {
+  transform-origin: 26px 26px;
+}
+
+.loader__motion-thick {
+  animation-name: motion-thick;
+}
+
+.loader__motion-medium {
+  animation-name: motion-medium;
+}
+
+.loader__motion-thin {
+  animation-name: motion-thin;
+}
+
+.loader__sand-drop {
+  animation-name: sand-drop;
+}
+
+.loader__sand-fill {
+  animation-name: sand-fill;
+}
+
+.loader__sand-grain-left {
+  animation-name: sand-grain-left;
+}
+
+.loader__sand-grain-right {
+  animation-name: sand-grain-right;
+}
+
+.loader__sand-line-left {
+  animation-name: sand-line-left;
+}
+
+.loader__sand-line-right {
+  animation-name: sand-line-right;
+}
+
+.loader__sand-mound-top {
+  animation-name: sand-mound-top;
+}
+
+.loader__sand-mound-bottom {
+  animation-name: sand-mound-bottom;
+  transform-origin: 12.25px 31.5px;
+}
+@keyframes loader-flip {
+  from {
+    transform: translate(13.75px, 9.25px) rotate(-180deg);
+  }
+
+  24%, to {
+    transform: translate(13.75px, 9.25px) rotate(0);
+  }
+}
+
+@keyframes glare-top {
+  from {
+    stroke: rgba(255, 255, 255, 0);
+  }
+
+  24%, to {
+    stroke: white;
+  }
+}
+
+@keyframes glare-bottom {
+  from {
+    stroke: white;
+  }
+
+  24%, to {
+    stroke: rgba(255, 255, 255, 0);
+  }
+}
+
+.container-button {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "bt-1 bt-2 bt-3"
+    "bt-4 bt-5 bt-6";
+  position: relative;
+  perspective: 800px;
+  padding: 0;
+  width: 135px;
+  height: 47px;
+  margin: 10px auto 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+.container-button:active {
+  transform: scale(0.95);
+}
+
+.hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+}
+
+.bt-1 {
+  grid-area: bt-1;
+}
+
+.bt-2 {
+  grid-area: bt-2;
+}
+
+.bt-3 {
+  grid-area: bt-3;
+}
+
+.bt-4 {
+  grid-area: bt-4;
+}
+
+.bt-5 {
+  grid-area: bt-5;
+}
+
+.bt-6 {
+  grid-area: bt-6;
+}
+
+
+.bt-1:hover ~ button {
+  transform: rotateX(15deg) rotateY(-15deg) rotateZ(0deg);
+  box-shadow: -2px -2px #18181888;
+}
+
+.bt-1:hover ~ button::after {
+  animation: shake 0.5s ease-in-out 0.3s;
+  text-shadow: -2px -2px #18181888;
+}
+
+.bt-3:hover ~ button {
+  transform: rotateX(15deg) rotateY(15deg) rotateZ(0deg);
+  box-shadow: 2px -2px #18181888;
+}
+
+.bt-3:hover ~ button::after {
+  animation: shake 0.5s ease-in-out 0.3s;
+  text-shadow: 2px -2px #18181888;
+}
+
+
+.bt-4:hover ~ button {
+  transform: rotateX(-15deg) rotateY(-15deg) rotateZ(0deg);
+  box-shadow: -2px 2px #18181888;
+}
+
+.bt-4:hover ~ button::after {
+  animation: shake 0.5s ease-in-out 0.3s;
+  text-shadow: -2px 2px #18181888;
+}
+
+
+.bt-6:hover ~ button {
+  transform: rotateX(-15deg) rotateY(15deg) rotateZ(0deg);
+  box-shadow: 2px 2px #18181888;
+}
+
+.bt-6:hover ~ button::after {
+  animation: shake 0.5s ease-in-out 0.3s;
+  text-shadow: 2px 2px #18181888;
+}
+
+
+.hover:hover ~ button::before {
+  background: transparent;
+}
+
+.hover:hover ~ button::after {
+  content: "Restart";
+  top: -150%;
+  transform: translate(-50%, 0);
+  font-size: 34px;
+  color: #05bc48;
+}
+
+.container-button button {
+  position: absolute;
+  padding: 0;
+  width: 135px;
+  height: 47px;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 900;
+ border: 3px solid #E9D5FF;
+  border-radius: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.container-button button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 135px;
+  height: 47px;
+background-color: #8B5CF6;
+  border-radius: 12px;
+  transition: all 0.3s ease-in-out;
+  z-index: -1;
+}
+
+
+.container-button button::after {
+  content: "Restart";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 135px;
+  height: 47px;
+  background-color: transparent;
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 47px;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease-in-out;
+  z-index: 2;
+}
+
+
+@keyframes shake {
+  0% {
+    left: 45%;
+  }
+
+  25% {
+    left: 54%;
+  }
+
+  50% {
+    left: 48%;
+  }
+
+  75% {
+    left: 52%;
+  }
+
+  100% {
+    left: 50%;
   }
 }
